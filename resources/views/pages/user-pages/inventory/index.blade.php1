@@ -1,0 +1,83 @@
+@extends('layouts.user.main', ['title' => 'Data Inventaris'])
+
+@section('content')
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <div class="page-pretitle">
+                        Data Inventaris
+                    </div>
+                    <h2 class="page-title">
+                        List Inventaris
+                    </h2>
+                </div>
+                <div class="col-md-auto ms-auto">
+                    <form id="filterForm">
+                        <label for="room" class="form-label visually-hidden">Filter Ruangan</label>
+                        <select class="form-select" id="room" name="room">
+                            <option value="" selected>Semua Ruangan</option>
+                            @foreach ($rooms as $room)
+                                <option value="{{ $room->id }}">{{ $room->name }}</option>
+                            @endforeach
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-cards" id="dataList">
+                @include('pages.user-pages.inventory.list', ['items' => $items])
+            </div>
+        </div>
+    </div>
+@endsection
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('body').on('change', '#room', function() {
+                $('#filterForm').submit();
+            });
+
+            $('#filterForm').submit(function(e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: "{{ route('data-inventaris.index') }}",
+                    type: "GET",
+                    data: formData,
+                    success: function(response) {
+                        console.log(response);
+                        $('#dataList').html(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+
+            loadAllData();
+        });
+
+        function loadAllData() {
+            $.ajax({
+                url: "{{ route('data-inventaris.index') }}",
+                type: "GET",
+                data: {
+                    room: ''
+                },
+                success: function(response) {
+                    console.log(response);
+                    $('#dataList').html(response);
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+    </script>
+@endpush

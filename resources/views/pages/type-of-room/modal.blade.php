@@ -1,0 +1,51 @@
+<div class="modal modal-blur fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('jenis-keperluan.store') }}" id="main-form" method="POST">
+                <input type="hidden" name="id" id="id">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-control" name="name" id="name">
+                        <span class="text-danger error_text name_error"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Pembelajaran ?</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="is_learning"
+                                id="is_learning_true" value="1">
+                            <label class="form-check-label" for="is_learning_true">Ya</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="is_learning"
+                                id="is_learning_false" value="0">
+                            <label class="form-check-label" for="is_learning_false">Tidak</label>
+                        </div>
+                        <span class="text-danger error_text name_error"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                        Batal
+                    </a>
+                    <button type="submit" class="btn btn-primary ms-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+                            <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M14 4l0 4l-6 0l0 -4" />
+                        </svg>
+                        Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
